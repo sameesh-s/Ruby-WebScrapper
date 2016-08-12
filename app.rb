@@ -3,6 +3,7 @@ require 'sinatra'
 require 'nokogiri'
 require 'open-uri'
 
+
   get '/app' do
     '<form action="/result" method="POST">
       <input type="text" name="title" />
@@ -12,7 +13,8 @@ require 'open-uri'
 
   post '/result' do
     doc = Nokogiri::HTML open (params[:title].to_s)
-    links = doc.css("a").map{ |i| i["href"]+'<br>'}.map{|i| i}
-    heading = doc.css("h1,h2").map{ |i| i.text+"<br>" }
-    '<h1>Headings</h1>'+heading.join+'<br><h1>Links</h1>'+links.join
+    links = doc.css("a").map{ |i| i["href"]}
+    heading = doc.css("h1,h2").map{ |i| i.text}
+    arr = links.select{|i| i[0]=='h'}
+    '<h1>Headings</h1>'+heading.join('<br>')+'<br><h1>Links</h1>'+arr.join("<br>")
   end
