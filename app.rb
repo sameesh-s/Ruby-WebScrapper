@@ -24,4 +24,3 @@ end
     heading = doc.css("h1,h2").map{ |i| i.text+"<br>" }
     '<h1>Headings</h1>'+heading.join+'<br><h1>Links</h1>'+links.join
   end
-s
