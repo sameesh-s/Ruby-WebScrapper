@@ -22,10 +22,10 @@ require 'json'
     res['h3']=heading.select{|i| i.name=="h3"}.map{|i| i.text.strip}
     res['h4']=heading.select{|i| i.name=="h4"}.map{|i| i.text.strip}
     res['links']=links.select{|i| i[0]=='h'}
-
+    data = JSON.pretty_generate res
     File.open('headers_links.json', 'w') do |f|
-      f.puts res.to_json
+      f.write(data)
     end
     content_type :json
-    File.read('headers_links.json')
+      File.read('headers_links.json')
   end
